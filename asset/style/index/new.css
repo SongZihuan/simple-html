@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
+    background-color: #f0f8ff;
+}
+
+h1 {
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.success-icon {
+    font-size: 100px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
