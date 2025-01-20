@@ -4,8 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const filetool = require("./src/utils/file.js")
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const entry = {}
-const HTMMLPlugin = []
 const mode = "production"
 const dist_name = "dist-prod"
 
@@ -22,52 +20,69 @@ const html_minify = {
   minifyURLs: true,
 }
 
-const { localPathResult: AllHTMLLocalFile4xx } = filetool.getAllFilePaths(path.resolve(__dirname, 'src', 'html', "error", "4xx"))
+const HTMMLPlugin = []
+
+const { localPathResult: AllHTMLLocalFile4xx } = filetool.getAllFilePaths(path.resolve(__dirname, 'src/html/error/4xx'))
 AllHTMLLocalFile4xx.forEach((filePath) => {
   if (!filePath.endsWith(".html")) {
     return
   }
 
-  if(filePath.includes("400.html")){
-    entry["404"] = path.resolve(__dirname, 'src', '404.js')
-
+  if(filePath.includes("signal.html")){
     HTMMLPlugin.push(new HtmlWebpackPlugin({
       inject:'body',
-      template: path.resolve(__dirname, 'src', 'html', "error", "4xx", "404.html"),  //指定模板文件
-      filename: path.join("error", filePath),
-      chunks: ["404"],
-      minify: html_minify,
+      template: path.resolve(__dirname, 'src/html/error/4xx', filePath),  //指定模板文件
+      filename: path.join("error/4xx", filePath),
+      chunks: ["signal"],
+      publicPath: "../../"
     }))
     return
   }
 
-  const name = "ck" + filePath.replace(".html", "").replace("/", "-").replace('\\', '-')
-  entry[name] = path.resolve(__dirname, 'src', '4xx.js')
+  if(filePath.includes("400.html")){
+    HTMMLPlugin.push(new HtmlWebpackPlugin({
+      inject:'body',
+      template: path.resolve(__dirname, 'src/html/error/4xx', filePath),  //指定模板文件
+      filename: path.join("error/4xx", filePath),
+      chunks: ["common", "err404"],
+      publicPath: "../../"
+    }))
+    return
+  }
+
 
   HTMMLPlugin.push(new HtmlWebpackPlugin({
     inject:'body',
-    template: path.resolve(__dirname, 'src', 'html', "error", "4xx", filePath),  //指定模板文件
-    filename: path.join("error", filePath),
-    chunks: [name],
-    minify: html_minify,
+    template: path.resolve(__dirname, 'src/html/error/4xx', filePath),  //指定模板文件
+    filename: path.join("error/4xx", filePath),
+    chunks: ["common", "err4xx"],
+    publicPath: "../../"
   }))
 })
 
-const { localPathResult: AllHTMLLocalFile5xx } = filetool.getAllFilePaths(path.resolve(__dirname, 'src', 'html', "error", "5xx"))
+const { localPathResult: AllHTMLLocalFile5xx } = filetool.getAllFilePaths(path.resolve(__dirname, 'src/html/error/5xx'))
 AllHTMLLocalFile5xx.forEach((filePath) => {
   if (!filePath.endsWith(".html")) {
     return
   }
 
-  const name = "ck" + filePath.replace(".html", "").replace("/", "-").replace('\\', '-')
-  entry[name] = path.resolve(__dirname, 'src', '5xx.js')
+  if(filePath.includes("signal.html")){
+    HTMMLPlugin.push(new HtmlWebpackPlugin({
+      inject:'body',
+      template: path.resolve(__dirname, 'src/html/error/5xx', filePath),  //指定模板文件
+      filename: path.join("error/5xx", filePath),
+      chunks: ["signal"],
+      publicPath: "../../"
+    }))
+    return
+  }
 
   HTMMLPlugin.push(new HtmlWebpackPlugin({
     inject:'body',
-    template: path.resolve(__dirname, 'src', 'html', "error", "5xx", filePath),  //指定模板文件
-    filename: path.join("error", filePath),
-    chunks: [name],
-    minify: html_minify,
+    template: path.resolve(__dirname, 'src/html/error/5xx', filePath),  //指定模板文件
+    filename: path.join("error/5xx", filePath),
+    chunks: ["common", "err5xx"],
+    publicPath: "../../"
   }))
 })
 
@@ -83,11 +98,15 @@ module.exports = {
   },
 
   entry: {
-    ...entry,
-    index: path.resolve(__dirname, 'src', 'index.js'),
-    new: path.resolve(__dirname, 'src', 'new.js'),
-    license: path.resolve(__dirname, 'src', 'license.js'),
-    mitorg: path.resolve(__dirname, 'src', 'mitorg.js'),
+    common: path.resolve(__dirname, 'src/common.js'),
+    index: path.resolve(__dirname, 'src/index.js'),
+    signal: path.resolve(__dirname, 'src/signal.js'),
+    new: path.resolve(__dirname, 'src/new.js'),
+    license: path.resolve(__dirname, 'src/license.js'),
+    mitorg: path.resolve(__dirname, 'src/mitorg.js'),
+    err4xx: path.resolve(__dirname, 'src/4xx.js'),
+    err404: path.resolve(__dirname, 'src/404.js'),
+    err5xx: path.resolve(__dirname, 'src/5xx.js'),
   },
 
   output: {
@@ -108,8 +127,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.css$/, // 匹配.css文件
+        use: [
+          MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"
+        ],
       },
       {
         test:/\.(png|jpg|jpeg|svg|gif)$/i,
@@ -149,8 +170,10 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'public', to: './' }, // 这里假设你想将 public 文件夹下的所有内容复制到输出目录的根目录下
+        { from: 'public', to: './' },
         { from: './config.json', to: './SH_CONFIG.json' },
+        { from: './LICENSE', to: './LICENSE_US' },
+        { from: './LICENSE_CN', to: './LICENSE_CN' },
       ],
     }),
     ...HTMMLPlugin,
@@ -158,47 +181,61 @@ module.exports = {
       inject:'body',
       template: path.resolve(__dirname, 'src', "html", "index.html"),  //指定模板文件
       filename: "index.html",
-      chunks: ["index"],
+      chunks: ["common", "index"],
       minify: html_minify,
+      publicPath: "./",
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","LICENSE_CN.html"),  //指定模板文件
       filename: "LICENSE_CN.html",
-      chunks: ["license"],
+      chunks: ["common", "license"],
       minify: html_minify,
+      publicPath: "./",
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","LICENSE_EN.html"),  //指定模板文件
       filename: "LICENSE_EN.html",
-      chunks: ["license"],
+      chunks: ["common", "license"],
       minify: html_minify,
+      publicPath: "./",
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","mitorg.html"),  //指定模板文件
       filename: "mitorg.html",
-      chunks: ["mitorg"],
+      chunks: ["common", "mitorg"],
       minify: html_minify,
+      publicPath: "./",
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","index.new.signal.html"),  //指定模板文件
       filename: "index.new.signal.html",
-      chunks: ["new"],
+      chunks: ["common", "new", "signal"],  // 此signal要设置common
       minify: html_minify,
+      publicPath: "./",
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","index.new.html"),  //指定模板文件
       filename: "index.new.html",
-      chunks: ["new"],
+      chunks: ["common", "new"],
       minify: html_minify,
+      publicPath: "./",
+    }),
+    new HtmlWebpackPlugin({
+      inject:'body',
+      template: path.resolve(__dirname, 'src/html/error/4xx/404.signal.html'),  //指定模板文件
+      filename: "404.html",
+      chunks: ["common", "signal"],  // 此signal要设置common
+      minify: html_minify,
+      publicPath: "./",
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].bundle.css',
-      chunkFilename: '[id].bundle.css',
+      filename: 'style/[name].[hash].bundle.css',
+      chunkFilename: 'css/[id].bundle.css',
     }),
   ],
 
