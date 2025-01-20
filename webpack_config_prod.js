@@ -172,8 +172,8 @@ module.exports = {
       patterns: [
         { from: 'public', to: './' },
         { from: './config.json', to: './SH_CONFIG.json' },
-        { from: './LICENSE', to: './LICENSE_US' },
-        { from: './LICENSE_CN', to: './LICENSE_CN' },
+        { from: './LICENSE', to: './' },
+        { from: './LICENSE_CN', to: './' },
       ],
     }),
     ...HTMMLPlugin,
@@ -187,16 +187,16 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject:'body',
-      template: path.resolve(__dirname, 'src', "html","LICENSE_CN.html"),  //指定模板文件
-      filename: "LICENSE_CN.html",
+      template: path.resolve(__dirname, 'src', "html","LICENSE_US.html"),  //指定模板文件
+      filename: "LICENSE_US.html",
       chunks: ["common", "license"],
       minify: html_minify,
       publicPath: "./",
     }),
     new HtmlWebpackPlugin({
       inject:'body',
-      template: path.resolve(__dirname, 'src', "html","LICENSE_EN.html"),  //指定模板文件
-      filename: "LICENSE_EN.html",
+      template: path.resolve(__dirname, 'src/html/LICENSE_CN.html'),  //指定模板文件
+      filename: "LICENSE_CN.html",
       chunks: ["common", "license"],
       minify: html_minify,
       publicPath: "./",
