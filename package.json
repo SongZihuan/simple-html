@@ -1,0 +1,33 @@
+{
+  "name": "simple-html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "npx webpack server --config webpack_config_dev.js",
+    "build:dev": "npx webpack --config webpack_config_dev.js",
+    "build:dev:run": "npx pnpm build:dev && npx pnpm dev",
+    "prod": "npx webpack server --config webpack_config_prod.js",
+    "build:prod": "npx webpack --config webpack_config_prod.js",
+    "build:prod:run": "npx pnpm build:prod && npx pnpm prod"
+  },
+  "author": "宋子桓（Song Zihuan）",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  },
+  "dependencies": {
+    "extract-loader": "^5.1.0",
+    "file-loader": "^6.2.0",
+    "jquery": "^3.7.1",
+    "postcss-loader": "^8.1.1",
+    "sass-loader": "^16.0.4"
+  }
+}
