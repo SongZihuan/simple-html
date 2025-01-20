@@ -2,12 +2,26 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const filetool = require("./src/utils/file.js")
-const CopyWebpackPlugin = require('copy-webpack-plugin');4
+const TerserPlugin = require('terser-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const entry = {}
 const HTMMLPlugin = []
-const mode = "development"
-const dist_name = "dist-dev"
+const mode = "production"
+const dist_name = "docs"
+
+const html_minify = {
+  collapseWhitespace: true,
+  removeComments: true,
+  removeRedundantAttributes: true,
+  useShortDoctype: true,
+  removeEmptyAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  keepClosingSlash: true,
+  minifyJS: true,
+  minifyCSS: true,
+  minifyURLs: true,
+}
 
 const { localPathResult: AllHTMLLocalFile4xx } = filetool.getAllFilePaths(path.resolve(__dirname, 'src', 'html', "error", "4xx"))
 AllHTMLLocalFile4xx.forEach((filePath) => {
@@ -22,7 +36,8 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
       inject:'body',
       template: path.resolve(__dirname, 'src', 'html', "error", "4xx", "404.html"),  //指定模板文件
       filename: path.join("error", filePath),
-      chunks: ["404"]
+      chunks: ["404"],
+      minify: html_minify,
     }))
     return
   }
@@ -34,7 +49,8 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
     inject:'body',
     template: path.resolve(__dirname, 'src', 'html', "error", "4xx", filePath),  //指定模板文件
     filename: path.join("error", filePath),
-    chunks: [name]
+    chunks: [name],
+    minify: html_minify,
   }))
 })
 
@@ -51,7 +67,8 @@ AllHTMLLocalFile5xx.forEach((filePath) => {
     inject:'body',
     template: path.resolve(__dirname, 'src', 'html', "error", "5xx", filePath),  //指定模板文件
     filename: path.join("error", filePath),
-    chunks: [name]
+    chunks: [name],
+    minify: html_minify,
   }))
 })
 
@@ -87,6 +104,20 @@ module.exports = {
     alias: {
       "@": path.join(__dirname, "src")
     }
+  },
+
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true, // 移除console.log (Github/发布版专属)
+            drop_debugger: true, // 移除debugger (Github/发布版专属)
+          },
+        },
+      }),
+    ],
   },
 
   module: {
@@ -143,6 +174,7 @@ module.exports = {
       template: path.resolve(__dirname, 'src', "html", "index.html"),  //指定模板文件
       filename: "index.html",
       chunks: ["index"],
+      minify: html_minify,
       templateParameters: {
         'process.env.SH_ICP': JSON.stringify(process.env.SH_ICP),
         'process.env.SH_WANGAN': JSON.stringify(process.env.SH_WANGAN),
@@ -152,31 +184,36 @@ module.exports = {
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","LICENSE_CN.html"),  //指定模板文件
       filename: "LICENSE_CN.html",
-      chunks: ["license"]
+      chunks: ["license"],
+      minify: html_minify,
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","LICENSE_EN.html"),  //指定模板文件
       filename: "LICENSE_EN.html",
-      chunks: ["license"]
+      chunks: ["license"],
+      minify: html_minify,
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","mitorg.html"),  //指定模板文件
       filename: "mitorg.html",
-      chunks: ["mitorg"]
+      chunks: ["mitorg"],
+      minify: html_minify,
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","index.new.signal.html"),  //指定模板文件
       filename: "index.new.signal.html",
-      chunks: ["new"]
+      chunks: ["new"],
+      minify: html_minify,
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","index.new.html"),  //指定模板文件
       filename: "index.new.html",
-      chunks: ["new"]
+      chunks: ["new"],
+      minify: html_minify,
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].bundle.css',

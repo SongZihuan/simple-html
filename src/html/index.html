@@ -15,5 +15,70 @@
 <p>此作品遵循 <a href="/LICENSE_EN.html" target="_blank">MIT 协议</a> 发布。</p>
 <p>Copyright (c) 宋子桓（Song Zihuan）。</p>
 
+<script>
+function extractNumbersFromString(str) {
+    // 正则表达式匹配非数字字符后紧跟数字，然后是更多非数字字符
+    const regex = /[^0-9]+(\d+)[^0-9]+/g
+    let matches = ""
+    let match = null
+
+    // 使用正则表达式的全局搜索来查找所有匹配项
+    while ((match = regex.exec(str)) !== null) {
+        // 提取数字部分并添加到结果数组
+        matches += match[1].toString()
+    }
+    return matches
+}
+
+fetch("/SH_CONFIG.json")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        return response.text().then(text => {
+            const data = JSON.parse(text);
+            if (typeof data !== "object" || data === null) {
+                throw new Error('Config data error');
+            }
+            return data
+        })
+    })
+    .then(SH_CONFIG => {
+        if (SH_CONFIG && SH_CONFIG.ICP) {
+            const p = document.createElement('p');
+            const a = document.createElement('a');
+            a.href = "https://beian.miit.gov.cn/";
+            a.target = "_blank"
+            a.textContent = SH_CONFIG.ICP;
+            p.appendChild(a);
+            document.body.appendChild(p);
+        }
+
+        if (SH_CONFIG && SH_CONFIG.WANGAN) {
+            const p = document.createElement('p');
+            const img = document.createElement('img');
+            const a = document.createElement('a');
+
+            img.alt = "网络安全图标"
+            img.src = "/image/wangan.png";
+            img.style = "vertical-align: middle"
+
+            SH_CONFIG.WANGAN_NUM = extractNumbersFromString(SH_CONFIG.WANGAN)
+
+            a.href = `https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${SH_CONFIG.WANGAN_NUM}`;
+            a.target = "_blank";
+            a.textContent = SH_CONFIG.WANGAN;
+
+            p.appendChild(img)
+            p.appendChild(a);
+            document.body.appendChild(p);
+        }
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+</script>
+
 </body>
 </html>

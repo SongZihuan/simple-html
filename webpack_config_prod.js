@@ -2,10 +2,25 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const filetool = require("./src/utils/file.js")
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const entry = {}
 const HTMMLPlugin = []
+const mode = "production"
 const dist_name = "dist-prod"
+
+const html_minify = {
+  collapseWhitespace: true,
+  removeComments: true,
+  removeRedundantAttributes: true,
+  useShortDoctype: true,
+  removeEmptyAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  keepClosingSlash: true,
+  minifyJS: true,
+  minifyCSS: true,
+  minifyURLs: true,
+}
 
 const { localPathResult: AllHTMLLocalFile4xx } = filetool.getAllFilePaths(path.resolve(__dirname, 'src', 'html', "error", "4xx"))
 AllHTMLLocalFile4xx.forEach((filePath) => {
@@ -20,7 +35,8 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
       inject:'body',
       template: path.resolve(__dirname, 'src', 'html', "error", "4xx", "404.html"),  //指定模板文件
       filename: path.join("error", filePath),
-      chunks: ["404"]
+      chunks: ["404"],
+      minify: html_minify,
     }))
     return
   }
@@ -32,7 +48,8 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
     inject:'body',
     template: path.resolve(__dirname, 'src', 'html', "error", "4xx", filePath),  //指定模板文件
     filename: path.join("error", filePath),
-    chunks: [name]
+    chunks: [name],
+    minify: html_minify,
   }))
 })
 
@@ -49,12 +66,15 @@ AllHTMLLocalFile5xx.forEach((filePath) => {
     inject:'body',
     template: path.resolve(__dirname, 'src', 'html', "error", "5xx", filePath),  //指定模板文件
     filename: path.join("error", filePath),
-    chunks: [name]
+    chunks: [name],
+    minify: html_minify,
   }))
 })
 
 module.exports = {
-  mode: 'production',
+  mode: mode,
+
+  context: __dirname,
 
   performance: {
     hints: 'warning', // 或者 'error'，取决于你希望如何处理超出限制的情况
@@ -79,11 +99,24 @@ module.exports = {
     charset: true,
   },
 
+  resolve: {
+    alias: {
+      "@": path.join(__dirname, "src")
+    },
+  },
+
   module: {
     rules: [
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test:/\.(png|jpg|jpeg|svg|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]'
+        }
       },
       {
         test:/\.(png|jpg|jpeg|svg|gif)$/i,
@@ -114,42 +147,54 @@ module.exports = {
   },
 
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'public', to: './' }, // 这里假设你想将 public 文件夹下的所有内容复制到输出目录的根目录下
+        { from: './config.json', to: './SH_CONFIG.json' },
+      ],
+    }),
     ...HTMMLPlugin,
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html", "index.html"),  //指定模板文件
       filename: "index.html",
-      chunks: ["index"]
+      chunks: ["index"],
+      minify: html_minify,
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","LICENSE_CN.html"),  //指定模板文件
       filename: "LICENSE_CN.html",
-      chunks: ["license"]
+      chunks: ["license"],
+      minify: html_minify,
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","LICENSE_EN.html"),  //指定模板文件
       filename: "LICENSE_EN.html",
-      chunks: ["license"]
+      chunks: ["license"],
+      minify: html_minify,
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","mitorg.html"),  //指定模板文件
       filename: "mitorg.html",
-      chunks: ["mitorg"]
+      chunks: ["mitorg"],
+      minify: html_minify,
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","index.new.signal.html"),  //指定模板文件
       filename: "index.new.signal.html",
-      chunks: ["new"]
+      chunks: ["new"],
+      minify: html_minify,
     }),
     new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src', "html","index.new.html"),  //指定模板文件
       filename: "index.new.html",
-      chunks: ["new"]
+      chunks: ["new"],
+      minify: html_minify,
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].bundle.css',
@@ -162,8 +207,8 @@ module.exports = {
       directory: path.join(__dirname, dist_name),
     },
     compress: true,
-    port: 1002,
+    port: 1001,
     open: true,
-    hot: false,
+    hot: true,
   },
 };
