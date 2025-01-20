@@ -11,7 +11,7 @@
     "build:prod": "npx webpack --config webpack_config_prod.js",
     "build:prod:run": "npx pnpm build:prod && npx pnpm prod",
     "github": "npx webpack server --config webpack_config_github.js",
-    "build:github": "npx webpack --config webpack_config_github.js",
+    "build:github": "npx webpack --config webpack_config_github.js && node ./github-page/cname.cjs",
     "build:github:run": "npx pnpm build:github && npx pnpm github"
   },
   "author": "宋子桓（Song Zihuan）",
