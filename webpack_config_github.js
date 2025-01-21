@@ -112,11 +112,11 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, dist_name),  //打包后的文件存放的地方
-    filename: 'js/[name].[hash].bundle.js',  //打包后输出文件的文件名
+    filename: 'js/[name].[fullhash].bundle.js',  //打包后输出文件的文件名
     chunkFilename: '[name].bundle.js',
     clean: true,
-    publicPath: "./",
     charset: true,
+    publicPath: "/"
   },
 
   resolve: {
@@ -142,31 +142,55 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/, // 匹配.css文件
+        test: /\.(css|scss|sass)$/,
         use: [
-          MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
         ],
       },
       {
         test:/\.(png|jpg|jpeg|svg|gif)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'images/[name][ext]'
-        }
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192, // 8KB 以下的文件将被转换为 Data URL
+              fallback: 'file-loader',
+              outputPath: 'images', // 类似于 file-loader 的配置
+              name: '[name].[fullhash].[ext]',
+            },
+          },
+        ],
       },
       {
-        test:/\.(png|jpg|jpeg|svg|gif)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'images/[name][ext]'
-        }
+        test:/\.(mp4|m4v|avi|mov|qt|wmv|mkv|flv|webm|mpeg|mpg|3gp|3g2)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192, // 8KB 以下的文件将被转换为 Data URL
+              fallback: 'file-loader',
+              outputPath: 'videos', // 类似于 file-loader 的配置
+              name: '[name].[fullhash].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'font/[name][ext]'
-        }
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192, // 8KB 以下的文件将被转换为 Data URL
+              fallback: 'file-loader',
+              outputPath: 'fonts', // 类似于 file-loader 的配置
+              name: '[name].[fullhash].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.html$/i,
