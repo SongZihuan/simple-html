@@ -1,12 +1,15 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const filetool = require('./src/utils/file.js')
-const TerserPlugin = require('terser-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+import path from "path"
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyWebpackPlugin from "copy-webpack-plugin"
+import filetool from './src/utils/file.js'
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const mode = 'production'
-const dist_name = 'docs'
+const dist_name = 'dist-prod'
 
 const html_minify = {
   collapseWhitespace: true,
@@ -29,7 +32,7 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
     return
   }
 
-  if (filePath.includes('signal')) {
+  if (filePath.includes('signal.html')) {
     HTMMLPlugin.push(
       new HtmlWebpackPlugin({
         inject: 'body',
@@ -42,7 +45,7 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
     return
   }
 
-  if (filePath.includes('404')) {
+  if (filePath.includes('400.html')) {
     HTMMLPlugin.push(
       new HtmlWebpackPlugin({
         inject: 'body',
@@ -72,7 +75,7 @@ AllHTMLLocalFile5xx.forEach((filePath) => {
     return
   }
 
-  if (filePath.includes('signal')) {
+  if (filePath.includes('signal.html')) {
     HTMMLPlugin.push(
       new HtmlWebpackPlugin({
         inject: 'body',
@@ -96,7 +99,7 @@ AllHTMLLocalFile5xx.forEach((filePath) => {
   )
 })
 
-module.exports = {
+const config = {
   mode: mode,
 
   context: __dirname,
@@ -132,20 +135,6 @@ module.exports = {
     alias: {
       '@': path.join(__dirname, 'src')
     }
-  },
-
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          compress: {
-            drop_console: true, // 移除console.log (Github/发布版专属)
-            drop_debugger: true // 移除debugger (Github/发布版专属)
-          }
-        }
-      })
-    ]
   },
 
   module: {
@@ -199,13 +188,6 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: 'html-loader'
-      },
-      {
-        test: require.resolve('jquery'),
-        loader: 'expose-loader',
-        options: {
-          exposes: ['$', 'jQuery']
-        }
       }
     ]
   },
@@ -238,7 +220,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
-      template: path.resolve(__dirname, 'src', 'html', 'LICENSE_CN.html'), //指定模板文件
+      template: path.resolve(__dirname, 'src/html/LICENSE_CN.html'), //指定模板文件
       filename: 'LICENSE_CN.html',
       chunks: ['common', 'license'],
       minify: html_minify,
@@ -289,6 +271,8 @@ module.exports = {
     compress: true,
     port: 1001,
     open: true,
-    hot: false
+    hot: true
   }
 }
+
+export default config

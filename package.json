@@ -2,7 +2,14 @@
   "name": "huan-simple-html",
   "version": "1.0.0",
   "description": "一个简单的HTML项目，通过Webpack进行打包。请尽量使用pnpm处理此包。更多细节请查看\"README\"",
-  "keywords": ["html", "css", "javaascript", "webpack", "simple-html", "web-demo"],
+  "keywords": [
+    "html",
+    "css",
+    "javaascript",
+    "webpack",
+    "simple-html",
+    "web-demo"
+  ],
   "author": "宋子桓（Song Zihuan）",
   "license": "MIT LICENSE",
   "main": "src/main.js",
@@ -15,20 +22,19 @@
   "private": false,
   "engines": {
     "node": ">=18",
-    "pnpm": ">8"
+    "pnpm": ">=8"
   },
-  "os": ["windows","linux"],
   "scripts": {
     "lint": "eslint --ext .js,.mjs,.cjs,.ts --fix .",
     "lint:debug": "eslint --ext .js,.mjs,.cjs,.ts --debug --fix .",
-    "dev": "npx webpack server --config webpack_config_dev.cjs",
-    "build:dev": "npx webpack --config webpack_config_dev.cjs",
+    "dev": "npx webpack server --config webpack_config_dev.js",
+    "build:dev": "npx webpack --config webpack_config_dev.js",
     "build:dev:run": "npx pnpm build:dev && npx pnpm dev",
-    "prod": "npx webpack server --config webpack_config_prod.cjs",
-    "build:prod": "npx webpack --config webpack_config_prod.cjs",
+    "prod": "npx webpack server --config webpack_config_prod.js",
+    "build:prod": "npx webpack --config webpack_config_prod.js",
     "build:prod:run": "npx pnpm build:prod && npx pnpm prod",
-    "github": "npx webpack server --config webpack_config_github.cjs",
-    "build:github": "npx webpack --config webpack_config_github.cjs && node ./github-page/cname.cjs",
+    "github": "npx webpack server --config webpack_config_github.js",
+    "build:github": "npx webpack --config webpack_config_github.js && node github-page/cname.js",
     "build:github:run": "npx pnpm build:github && npx pnpm github"
   },
   "devDependencies": {
@@ -36,23 +42,24 @@
     "css-loader": "^7.1.2",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
-    "html-loader": "^5.1.0",
-    "html-webpack-plugin": "^5.6.3",
-    "mini-css-extract-plugin": "^2.9.2",
-    "prettier": "^2.8.7",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.0",
     "eslint-plugin-prettier": "^4.2.1",
     "extract-loader": "^5.1.0",
     "file-loader": "^6.2.0",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
     "jquery": "^3.7.1",
+    "mini-css-extract-plugin": "^2.9.2",
     "normalize.css": "^8.0.1",
     "postcss": "^8.5.1",
     "postcss-loader": "^8.1.1",
+    "prettier": "^2.8.7",
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
-    "url-loader": "^4.1.1"
+    "terser-webpack-plugin": "^5.3.11",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
   },
   "dependencies": {
   }

@@ -1,11 +1,11 @@
-const path = require('node:path')
-const fs = require('fs')
+import path from "path"
+import fs from "fs"
 
-module.exports = {
+export default {
   getAllFilePaths
 }
 
-function getAllFilePaths(dir) {
+export function getAllFilePaths(dir) {
   return _getAllFilePaths(dir, './', 5)
 }
 

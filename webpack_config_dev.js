@@ -1,24 +1,15 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const filetool = require('./src/utils/file.js')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+import path from "path"
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyWebpackPlugin from "copy-webpack-plugin"
+import filetool from './src/utils/file.js'
+import { fileURLToPath } from 'url';
 
-const mode = 'production'
-const dist_name = 'dist-prod'
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const html_minify = {
-  collapseWhitespace: true,
-  removeComments: true,
-  removeRedundantAttributes: true,
-  useShortDoctype: true,
-  removeEmptyAttributes: true,
-  removeStyleLinkTypeAttributes: true,
-  keepClosingSlash: true,
-  minifyJS: true,
-  minifyCSS: true,
-  minifyURLs: true
-}
+const mode = 'development'
+const dist_name = 'dist-dev'
 
 const HTMMLPlugin = []
 
@@ -95,7 +86,7 @@ AllHTMLLocalFile5xx.forEach((filePath) => {
   )
 })
 
-module.exports = {
+const config =  {
   mode: mode,
 
   context: __dirname,
@@ -184,13 +175,6 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: 'html-loader'
-      },
-      {
-        test: require.resolve('jquery'),
-        loader: 'expose-loader',
-        options: {
-          exposes: ['$', 'jQuery']
-        }
       }
     ]
   },
@@ -210,15 +194,13 @@ module.exports = {
       template: path.resolve(__dirname, 'src', 'html', 'index.html'), //指定模板文件
       filename: 'index.html',
       chunks: ['common', 'index'],
-      minify: html_minify,
       publicPath: './'
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
-      template: path.resolve(__dirname, 'src', 'html', 'LICENSE_US.html'), //指定模板文件
+      template: path.resolve(__dirname, 'src/html/LICENSE_US.html'), //指定模板文件
       filename: 'LICENSE_US.html',
       chunks: ['common', 'license'],
-      minify: html_minify,
       publicPath: './'
     }),
     new HtmlWebpackPlugin({
@@ -226,43 +208,38 @@ module.exports = {
       template: path.resolve(__dirname, 'src/html/LICENSE_CN.html'), //指定模板文件
       filename: 'LICENSE_CN.html',
       chunks: ['common', 'license'],
-      minify: html_minify,
       publicPath: './'
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
-      template: path.resolve(__dirname, 'src', 'html', 'mitorg.html'), //指定模板文件
+      template: path.resolve(__dirname, 'src/html/mitorg.html'), //指定模板文件
       filename: 'mitorg.html',
       chunks: ['common', 'mitorg'],
-      minify: html_minify,
       publicPath: './'
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
-      template: path.resolve(__dirname, 'src', 'html', 'index.new.signal.html'), //指定模板文件
+      template: path.resolve(__dirname, 'src/html/index.new.signal.html'), //指定模板文件
       filename: 'index.new.signal.html',
       chunks: ['common', 'new', 'signal'], // 此signal要设置common
-      minify: html_minify,
       publicPath: './'
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
-      template: path.resolve(__dirname, 'src', 'html', 'index.new.html'), //指定模板文件
+      template: path.resolve(__dirname, 'src/html/index.new.html'), //指定模板文件
       filename: 'index.new.html',
       chunks: ['common', 'new'],
-      minify: html_minify,
       publicPath: './'
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
       template: path.resolve(__dirname, 'src/html/error/4xx/404.signal.html'), //指定模板文件
       filename: '404.html',
-      chunks: ['common', 'signal'], // 此signal要设置common
-      minify: html_minify,
+      chunks: ['common', 'signal'], // 该signal要设置common
       publicPath: './'
     }),
     new MiniCssExtractPlugin({
-      filename: 'style/[name].[hash].bundle.css',
+      filename: 'style/[name].[fullhash].bundle.css',
       chunkFilename: 'css/[id].bundle.css'
     })
   ],
@@ -277,3 +254,5 @@ module.exports = {
     hot: true
   }
 }
+
+export default config

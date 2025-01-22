@@ -1,5 +1,6 @@
 // 清理状态
 import 'normalize.css'
+import jQuery from 'jquery';
 
 import Logo from './assets/image/logo.png'
 import WangAn from './assets/image/wangan.png'
@@ -18,3 +19,6 @@ window.Logo = Logo
 window.WangAn = WangAn
 window.SongZihuan = SongZihuan
 window.LogoBig = LogoBin
+
+window.jQuery = jQuery;
+window.$ = jQuery;
