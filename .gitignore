@@ -24,6 +24,9 @@ dist-*
 *.sln
 *.sw?
 *.bak
+.npmrc
 
 tsconfig.json
 vite.config.ts.timestamp-*
+
+huan-simple-html-1.0.0.tgz
