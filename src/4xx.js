@@ -1,1 +1,1 @@
-import "./style/error/4xx.css"
+import './style/error/4xx.css'

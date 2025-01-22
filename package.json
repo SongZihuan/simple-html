@@ -4,14 +4,16 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "dev": "npx webpack server --config webpack_config_dev.js",
-    "build:dev": "npx webpack --config webpack_config_dev.js",
+    "lint": "eslint --ext .js,.mjs,.cjs,.ts --fix .",
+    "lint:debug": "eslint --ext .js,.mjs,.cjs,.ts --debug --fix .",
+    "dev": "npx webpack server --config webpack_config_dev.cjs",
+    "build:dev": "npx webpack --config webpack_config_dev.cjs",
     "build:dev:run": "npx pnpm build:dev && npx pnpm dev",
-    "prod": "npx webpack server --config webpack_config_prod.js",
-    "build:prod": "npx webpack --config webpack_config_prod.js",
+    "prod": "npx webpack server --config webpack_config_prod.cjs",
+    "build:prod": "npx webpack --config webpack_config_prod.cjs",
     "build:prod:run": "npx pnpm build:prod && npx pnpm prod",
-    "github": "npx webpack server --config webpack_config_github.js",
-    "build:github": "npx webpack --config webpack_config_github.js && node ./github-page/cname.cjs",
+    "github": "npx webpack server --config webpack_config_github.cjs",
+    "build:github": "npx webpack --config webpack_config_github.cjs && node ./github-page/cname.cjs",
     "build:github:run": "npx pnpm build:github && npx pnpm github"
   },
   "author": "宋子桓（Song Zihuan）",
@@ -19,9 +21,12 @@
   "devDependencies": {
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
+    "prettier": "^2.8.7",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0"
@@ -35,6 +40,7 @@
     "postcss-loader": "^8.1.1",
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "eslint-plugin-prettier": "^4.2.1"
   }
 }

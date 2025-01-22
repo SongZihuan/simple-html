@@ -1,2 +1,1 @@
-import "/src/style/index/index.css"
-
+import '/src/style/index/index.css'

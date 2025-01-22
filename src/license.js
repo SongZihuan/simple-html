@@ -1,1 +1,1 @@
-import "/src/style/index/license.css"
+import '/src/style/index/license.css'

@@ -1,1 +1,1 @@
-import "/src/style/index/mitorg.css"
+import '/src/style/index/mitorg.css'
