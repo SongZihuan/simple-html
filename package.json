@@ -1,8 +1,23 @@
 {
-  "name": "simple-html",
+  "name": "huan-simple-html",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
+  "description": "一个简单的HTML项目，通过Webpack进行打包。请尽量使用pnpm处理此包。更多细节请查看\"README\"",
+  "keywords": ["html", "css", "javaascript", "webpack", "simple-html", "web-demo"],
+  "author": "宋子桓（Song Zihuan）",
+  "license": "MIT LICENSE",
+  "main": "src/main.js",
+  "module": "src/main.js",
+  "browser": "src/main.js",
+  "repository": "https://github.com/SongZihuan/simple-html",
+  "bug": "https://github.com/SongZihuan/simple-html/issues",
+  "homepage": "https://homepage.song-zh.com",
+  "type": "module",
+  "private": false,
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">8"
+  },
+  "os": ["windows","linux"],
   "scripts": {
     "lint": "eslint --ext .js,.mjs,.cjs,.ts --fix .",
     "lint:debug": "eslint --ext .js,.mjs,.cjs,.ts --debug --fix .",
@@ -16,8 +31,6 @@
     "build:github": "npx webpack --config webpack_config_github.cjs && node ./github-page/cname.cjs",
     "build:github:run": "npx pnpm build:github && npx pnpm github"
   },
-  "author": "宋子桓（Song Zihuan）",
-  "license": "MIT",
   "devDependencies": {
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
@@ -29,9 +42,7 @@
     "prettier": "^2.8.7",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.0"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^5.2.0",
     "eslint-plugin-prettier": "^4.2.1",
     "extract-loader": "^5.1.0",
     "file-loader": "^6.2.0",
@@ -42,5 +53,7 @@
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
     "url-loader": "^4.1.1"
+  },
+  "dependencies": {
   }
 }
