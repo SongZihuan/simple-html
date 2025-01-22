@@ -29,7 +29,7 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
     return
   }
 
-  if(filePath.includes("signal.html")){
+  if(filePath.includes("signal")){
     HTMMLPlugin.push(new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src/html/error/4xx', filePath),  //指定模板文件
@@ -40,7 +40,7 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
     return
   }
 
-  if(filePath.includes("400.html")){
+  if(filePath.includes("404")){
     HTMMLPlugin.push(new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src/html/error/4xx', filePath),  //指定模板文件
@@ -67,7 +67,7 @@ AllHTMLLocalFile5xx.forEach((filePath) => {
     return
   }
 
-  if(filePath.includes("signal.html")){
+  if(filePath.includes("signal")){
     HTMMLPlugin.push(new HtmlWebpackPlugin({
       inject:'body',
       template: path.resolve(__dirname, 'src/html/error/5xx', filePath),  //指定模板文件
