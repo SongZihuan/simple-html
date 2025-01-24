@@ -26,7 +26,7 @@
   },
   "scripts": {
     "init": "npx pnpm install",
-    "lint": "eslint --ext .js,.mjs,.cjs,.ts --fix .",
+    "lint": "eslint --ext .js,.mjs,.cjs --fix .",
     "lint:debug": "eslint --ext .js,.mjs,.cjs --debug --fix .",
     "dev": "npx webpack server --config webpack_config_dev.js",
     "build:dev": "npx webpack --config webpack_config_dev.js",
