@@ -155,6 +155,13 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(js|mjs|cjs)$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
         test: /\.(css|scss|sass)$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
       },
