@@ -1,6 +1,6 @@
 {
   "name": "huan-simple-html",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "一个简单的HTML项目，通过Webpack进行打包。请尽量使用pnpm处理此包。更多细节请查看\"README.md\"",
   "keywords": [
     "html",
@@ -55,6 +55,7 @@
     "file-loader": "^6.2.0",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
+    "huan-file-tool": "^1.0.5",
     "jquery": "^3.7.1",
     "mini-css-extract-plugin": "^2.9.2",
     "normalize.css": "^8.0.1",

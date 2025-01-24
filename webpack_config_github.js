@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
-import filetool from './src/utils/file.js'
+import filetool from 'huan-file-tool'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -27,7 +27,7 @@ const html_minify = {
 
 const HTMMLPlugin = []
 
-const { localPathResult: AllHTMLLocalFile4xx } = filetool.getAllFilePaths(path.resolve(__dirname, 'src/html/error/4xx'))
+const { localPathResult: AllHTMLLocalFile4xx } = filetool.filewaalk.getAllFilePaths(path.resolve(__dirname, 'src/html/error/4xx'))
 AllHTMLLocalFile4xx.forEach((filePath) => {
   if (!filePath.endsWith('.html')) {
     return
@@ -70,7 +70,7 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
   )
 })
 
-const { localPathResult: AllHTMLLocalFile5xx } = filetool.getAllFilePaths(path.resolve(__dirname, 'src/html/error/5xx'))
+const { localPathResult: AllHTMLLocalFile5xx } = filetool.filewaalk.getAllFilePaths(path.resolve(__dirname, 'src/html/error/5xx'))
 AllHTMLLocalFile5xx.forEach((filePath) => {
   if (!filePath.endsWith('.html')) {
     return
