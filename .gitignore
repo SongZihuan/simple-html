@@ -29,4 +29,4 @@ dist-*
 tsconfig.json
 vite.config.ts.timestamp-*
 
-huan-simple-html-1.0.0.tgz
+huan-*.tgz
