@@ -26,7 +26,9 @@ const html_minify = {
 
 const HTMMLPlugin = []
 
-const { localPathResult: AllHTMLLocalFile4xx } = filetool.filewaalk.getAllFilePaths(path.resolve(__dirname, 'src/html/error/4xx'))
+const { localPathResult: AllHTMLLocalFile4xx } = filetool.filewaalk.getAllFilePaths(
+  path.resolve(__dirname, 'src/html/error/4xx')
+)
 AllHTMLLocalFile4xx.forEach((filePath) => {
   if (!filePath.endsWith('.html')) {
     return
@@ -69,7 +71,9 @@ AllHTMLLocalFile4xx.forEach((filePath) => {
   )
 })
 
-const { localPathResult: AllHTMLLocalFile5xx } = filetool.filewaalk.getAllFilePaths(path.resolve(__dirname, 'src/html/error/5xx'))
+const { localPathResult: AllHTMLLocalFile5xx } = filetool.filewaalk.getAllFilePaths(
+  path.resolve(__dirname, 'src/html/error/5xx')
+)
 AllHTMLLocalFile5xx.forEach((filePath) => {
   if (!filePath.endsWith('.html')) {
     return
