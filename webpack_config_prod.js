@@ -143,8 +143,8 @@ const config = {
         test: /\.(js|mjs|cjs)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
-        },
+          loader: 'babel-loader'
+        }
       },
       {
         test: /\.(css|scss|sass)$/,
