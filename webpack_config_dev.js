@@ -1,12 +1,12 @@
-import path from "path"
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CopyWebpackPlugin from "copy-webpack-plugin"
+import path from 'path'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 import filetool from './src/utils/file.js'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const mode = 'development'
 const dist_name = 'dist-dev'
@@ -86,7 +86,7 @@ AllHTMLLocalFile5xx.forEach((filePath) => {
   )
 })
 
-const config =  {
+const config = {
   mode: mode,
 
   context: __dirname,

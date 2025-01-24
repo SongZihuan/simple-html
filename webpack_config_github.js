@@ -1,13 +1,13 @@
-import path from "path"
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CopyWebpackPlugin from "copy-webpack-plugin"
-import TerserPlugin from 'terser-webpack-plugin';
+import path from 'path'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
 import filetool from './src/utils/file.js'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const mode = 'production'
 const dist_name = 'docs'
@@ -203,7 +203,7 @@ const config = {
       {
         test: /\.html$/i,
         loader: 'html-loader'
-      },
+      }
     ]
   },
 
