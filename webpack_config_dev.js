@@ -150,7 +150,7 @@ const config = {
               limit: 8192, // 8KB 以下的文件将被转换为 Data URL
               fallback: 'file-loader',
               outputPath: 'images', // 类似于 file-loader 的配置
-              name: '[name].[fullhash].[ext]'
+              name: '[name].[hash].[ext]'
             }
           }
         ]
@@ -164,7 +164,7 @@ const config = {
               limit: 8192, // 8KB 以下的文件将被转换为 Data URL
               fallback: 'file-loader',
               outputPath: 'videos', // 类似于 file-loader 的配置
-              name: '[name].[fullhash].[ext]'
+              name: '[name].[hash].[ext]'
             }
           }
         ]
@@ -178,7 +178,7 @@ const config = {
               limit: 8192, // 8KB 以下的文件将被转换为 Data URL
               fallback: 'file-loader',
               outputPath: 'fonts', // 类似于 file-loader 的配置
-              name: '[name].[fullhash].[ext]'
+              name: '[name].[hash].[ext]'
             }
           }
         ]

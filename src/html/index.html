@@ -8,13 +8,52 @@
 </head>
 <body>
 <h1>欢迎光临！</h1>
-<p>我是宋子桓（Song Zihuan），非常欢迎你访问这个站点。</p>
-<p>非常荣幸您能访问我的博客：<a href="https://song-zh.com" target="_blank">Song's Blog</a></p>
-<p>同时，也欢迎您浏览我的GitHub仓库：<a href="https://github.com/SongZihuan" target="_blank">Song Zihuan on GitHub</a></p>
+
+<p>我是宋子桓（Song Zihuan），非常欢迎你访问这个站点，这个站点是关于MIT协议的站点。</p>
+
+<p>
+    MIT开源协议（Massachusetts Institute of Technology License）是一种广泛使用的开源软件许可协议，以其极为宽松的条款著称。以下是MIT许可证的主要特点和内容概览：
+</p>
+<p>
+    特点：
+</p>
+<ol>
+    <li><span class="bold">简单明了：</span>MIT许可证只有寥寥数行，非常容易理解，没有复杂的法律术语。</li>
+    <li><span class="bold">宽松自由：</span>它赋予软件使用者非常广泛的自由度，允许个人和商业机构自由地使用、复制、修改、合并、发布、分发、再授权和销售软件的原件或修改版，几乎没有任何限制。</li>
+    <li><span class="bold">唯一要求：</span>使用MIT许可的软件时，使用者必须保留软件中包含的原始版权和许可声明。这意味着当你分发基于MIT许可代码的衍生作品时，需要在你的发行包中包含原作者的许可声明。 </li>
+</ol>
+
+<p>
+    适用场景：
+</p>
+<ul>
+    <li><span class="bold">鼓励广泛采用：</span>对于希望自己的代码被尽可能多的人使用和贡献的开发者来说，MIT是一个极好的选择。</li>
+    <li><span class="bold">商业友好：</span>由于其宽松的条款，很多商业项目倾向于使用或接纳MIT许可的组件，因为它不会给产品带来额外的使用负担。</li>
+    <li><span class="bold">简单协作：</span>：对于小型项目或者快速原型开发，选择MIT可以简化合作过程中的法律考量。</li>
+</ul>
+
+<p>
+    总之，MIT许可证因其简洁和开放性而广受欢迎，特别适合那些旨在促进技术创新和知识共享的项目。
+</p>
+
+<p> 以上就是我的全部介绍，如果你想查阅MIT协议，可以 <a href="./LICENSE_US.html" target="_blank">点击此处（MIT LICENSE）立即前往查看MIT协议 </a>。</p>
+
+<p>如果你对我感兴趣，你还可以查看<a href="https://song-zh.com" target="_blank">点击此处，查看我的网站</a>。</p>
+<p>同时，也欢迎您浏览我的GitHub仓库：<a href="https://github.com/SongZihuan" target="_blank"> 宋子桓（Song Zihuan）的 GitHub</a></p>
 <p>希望您在这里能找到有趣的内容和灵感！祝您访问愉快！</p>
 
-<p>此作品遵循 <a href="./LICENSE_US.html" target="_blank">MIT 协议</a> 发布。</p>
-<p>Copyright (c) 宋子桓（Song Zihuan）。</p>
+<p id="copyright-container"></p>
+
+<script>
+    const currentYear = new Date().getFullYear();
+    const copyrightTemplate = `<p>Copyright &copy; ${currentYear} 宋子桓（Song Zihuan）. All rights reserved.</p>`;
+
+    const containerElement = document.getElementById('copyright-container');
+    // 将生成的版权信息插入到页面指定位置
+    if (containerElement) {
+        containerElement.innerHTML = copyrightTemplate;
+    }
+</script>
 
 <script>
 function extractNumbersFromString(str) {
@@ -61,6 +100,7 @@ fetch("/SH_CONFIG.json")
             const img = document.createElement('img');
             const a = document.createElement('a');
 
+            img.id = "WANGAN_LOGO"
             img.alt = "网络安全图标"
             img.src = window.WangAn;
             img.style = "vertical-align: middle"

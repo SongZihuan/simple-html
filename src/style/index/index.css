@@ -24,3 +24,12 @@ p {
     color: #666;
     line-height: 1.5;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+#WANGAN_LOGO {
+    max-width: 20px;
+    max-height: 20px;
+}
