@@ -21,10 +21,12 @@ Author email: songzihuan@song-zh.com
 
 ## Project information
 Project hosting address: [github.com/SongZihuan/simple-html](https://github.com/SongZihuan/simple-html)
-Github Page hosting: [github.com/huan-simple-html/huan-simple-html.github.io](https://github.com/huan-simple-html/huan-simple-html.github.io)
-Test access: [homepage.song-zh.com](https://homepage.song-zh.com/)
 
-Last updated: January 22, 2025.
+Github Page hosting: [github.com/huan-simple-html/huan-simple-html.github.io](https://github.com/huan-simple-html/huan-simple-html.github.io)
+
+Site address: [homepage.song-zh.com](https://homepage.song-zh.com/)
+
+Last updated: January 27, 2025.
 
 ## Special Note
 Note: The above is the English translation of the author's [README.md](/README.md) (machine translation involved)

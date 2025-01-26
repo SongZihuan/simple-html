@@ -21,10 +21,12 @@
 
 ## 项目信息
 项目托管地址：[github.com/SongZihuan/simple-html](https://github.com/SongZihuan/simple-html)
-Github Page托管: [github.com/huan-simple-html/huan-simple-html.github.io](https://github.com/huan-simple-html/huan-simple-html.github.io)
-测试访问：[homepage.song-zh.com](https://homepage.song-zh.com/)
 
-最后更新时间：2025年1月22日。
+Github Page托管: [github.com/huan-simple-html/huan-simple-html.github.io](https://github.com/huan-simple-html/huan-simple-html.github.io)
+
+站点地址：[homepage.song-zh.com](https://homepage.song-zh.com/)
+
+最后更新时间：2025年1月27日。
 
 ## 特别注意
 备注：以上README为作者原文。
