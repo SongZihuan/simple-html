@@ -36,8 +36,8 @@
     "build:prod:run": "npx pnpm build:prod && npx pnpm prod",
     "github": "npx webpack server --config webpack_config_github.js",
     "build:github": "npx webpack --config webpack_config_github.js && node github-page/cname.js",
-    "pack": "npx pnpm run init && npx pnpm run lint && npx pnpm pack",
     "build:github:run": "npx pnpm build:github && npx pnpm github",
+    "pack": "npx pnpm run init && npx pnpm run lint && npx pnpm pack",
     "login:npmjs": "npx pnpm login --registry=https://registry.npmjs.org",
     "publish:npmjs": "npx pnpm publish --registry=https://registry.npmjs.org"
   },
