@@ -1,5 +1,5 @@
-<!-- NOTE: 请将PR提交到仓库：[github.com/SongZihuan/simple-html](https://github.com/SongZihuan/simple-html)。 -->
-<!-- NOTE: 不要将任何PR提交到仓库：[github.com/huan-simple-html/huan-simple-html.github.io](https://github.com/huan-simple-html/huan-simple-html.github.io)。 -->
+<!-- NOTE: 请将PR提交到仓库：https://github.com/SongZihuan/simple-html。 -->
+<!-- NOTE: 不要将任何PR提交到仓库：https://github.com/huan-simple-html/huan-simple-html.github.io。 -->
 <!-- NOTE: 请务必再三确认你提交PR的仓库！！！ -->
 <!-- 请务必在创建PR前，在右侧 Labels 选项中加上label的其中一个: [feature]、[fix]、[documentation] 。以便于Actions自动生成Releases时自动对PR进行归类。 -->
 
