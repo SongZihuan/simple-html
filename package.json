@@ -1,6 +1,6 @@
 {
   "name": "huan-simple-html",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "一个简单的HTML项目，通过Webpack进行打包。请尽量使用pnpm处理此包。更多细节请查看\"README.md\"",
   "keywords": [
     "html",
@@ -35,7 +35,7 @@
     "build:prod": "npx webpack --config webpack_config_prod.js",
     "build:prod:run": "npx pnpm build:prod && npx pnpm prod",
     "github": "npx webpack server --config webpack_config_github.js",
-    "build:github": "npx webpack --config webpack_config_github.js && node github-page/cname.js",
+    "build:github": "npx webpack --config webpack_config_github.js",
     "build:github:run": "npx pnpm build:github && npx pnpm github",
     "pack": "npx pnpm run init && npx pnpm run lint && npx pnpm pack",
     "login:npmjs": "npx pnpm login --registry=https://registry.npmjs.org",

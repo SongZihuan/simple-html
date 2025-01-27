@@ -32,6 +32,7 @@ dist-prod
 github-page
 docs
 .github
+public/CNAME
 
 # Local
 *.local
