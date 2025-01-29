@@ -4,8 +4,6 @@ import jQuery from 'jquery'
 
 import Logo from './assets/image/logo.png'
 import WangAn from './assets/image/wangan.png'
-import SongZihuan from './assets/image/songzihuan.jpg'
-import LogoBin from './assets/image/logo_big.png'
 
 document.addEventListener('DOMContentLoaded', function () {
   // 动态设置favicon
@@ -17,8 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 window.Logo = Logo
 window.WangAn = WangAn
-window.SongZihuan = SongZihuan
-window.LogoBig = LogoBin
 
 window.jQuery = jQuery
 window.$ = jQuery
