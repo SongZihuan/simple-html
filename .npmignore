@@ -69,3 +69,6 @@ Recycle Bin
 *.sln
 *.sw?
 *.bak
+
+# EOL
+crlf2lf.sh
