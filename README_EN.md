@@ -17,7 +17,7 @@ Author Github: [github.com/SongZihuan](https://github.com/SongZihuan)
 
 Author homepage: [song-zh.com](https://song-zh.com)
 
-Author email: songzihuan@song-zh.com
+Author email: contact@song-zh.com
 
 ## Project information
 Project hosting address: [github.com/SongZihuan/simple-html](https://github.com/SongZihuan/simple-html)
