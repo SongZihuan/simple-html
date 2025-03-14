@@ -1,6 +1,6 @@
 {
   "name": "huan-simple-html",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "一个简单的HTML项目，通过Webpack进行打包。请尽量使用pnpm处理此包。更多细节请查看\"README.md\"",
   "keywords": [
     "html",
